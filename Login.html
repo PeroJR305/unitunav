@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h1>Welcome Back</h1>
+            <p class="subtitle">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
+
+            <form>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="กรอกอีเมลของคุณ"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="กรอกรหัสผ่าน"
+                        required
+                    >
+                </div>
+
+                <div class="options">
+                    <label class="remember">
+                        <input type="checkbox">
+                        <span>จำฉันไว้</span>
+                    </label>
+
+                    <a href="#">ลืมรหัสผ่าน?</a>
+                </div>
+
+                <button type="submit">LOGIN</button>
+
+            </form>
+
+            <p class="register">
+                ยังไม่มีบัญชี?
+                <a href="#">สมัครสมาชิก</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
