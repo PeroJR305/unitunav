@@ -3,9 +3,31 @@ let credit = 0;
 let topupHistory = [];
 let buyHistory = [];
 
+// ฟังก์ชันแสดง Modal แจ้งเตือนสไตล์ Dark Theme (แทน alert เดิม)
+function showAlert(title, bodyHtml, onConfirm = null, showCancel = false) {
+    document.getElementById('customModalTitle').innerHTML = title;
+    document.getElementById('customModalBody').innerHTML = bodyHtml;
+
+    const confirmBtn = document.getElementById('customModalConfirmBtn');
+    const cancelBtn = document.getElementById('customModalCancelBtn');
+
+    cancelBtn.style.display = showCancel ? 'inline-block' : 'none';
+
+    // ล้าง Event listener เก่า
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+    newConfirmBtn.addEventListener('click', () => {
+        if (onConfirm) onConfirm();
+    });
+
+    const modal = new bootstrap.Modal(document.getElementById('customAlertModal'));
+    modal.show();
+}
+
 // ฟังก์ชันสลับหน้าเพจ
 function showPage(pageId, event) {
-    if (event) event.preventDefault();
+    if (event && event.preventDefault) event.preventDefault();
     
     // ซ่อนทุกหน้า
     const pages = document.querySelectorAll('.page-section');
@@ -30,7 +52,7 @@ function showPage(pageId, event) {
 function addFreeMoney(amount) {
     credit += amount;
     updateCreditDisplay();
-    alert(`ได้รับเครดิตทดลองฟรีจำนวน ${amount} บาทเรียบร้อยแล้ว!`);
+    showAlert('<i class="fa-solid fa-coins me-2"></i>สำเร็จ', `ได้รับเครดิตทดลองฟรีจำนวน <b class="text-warning">${amount} บาท</b> เรียบร้อยแล้ว!`);
 }
 
 // อัปเดตแสดงผลยอดเครดิต
@@ -43,12 +65,12 @@ function updateCreditDisplay() {
 
 // ฟังก์ชันจำลองเติมเงิน
 function processTopup(event) {
-    event.preventDefault();
+    if (event && event.preventDefault) event.preventDefault();
     const amountInput = document.getElementById('topup-amount');
     const amount = parseFloat(amountInput.value);
 
     if (isNaN(amount) || amount <= 0) {
-        alert('กรุณากรอกจำนวนเงินให้ถูกต้อง');
+        showAlert('<i class="fa-solid fa-triangle-exclamation text-danger me-2"></i>ข้อผิดพลาด', 'กรุณากรอกจำนวนเงินให้ถูกต้อง');
         return;
     }
 
@@ -66,39 +88,61 @@ function processTopup(event) {
     });
 
     renderTopupHistory();
-    alert(`เติมเงินสำเร็จจำนวน ${amount} บาท!`);
-    showPage('history-topup');
+    showAlert('<i class="fa-solid fa-circle-check text-success me-2"></i>เติมเงินสำเร็จ', `เติมเงินจำนวน <b class="text-warning">${amount} บาท</b> เรียบร้อยแล้ว!`, () => {
+        showPage('history-topup');
+    });
 }
 
 // ฟังก์ชันสั่งซื้อสินค้า
 function processBuy(productName, price) {
     if (credit < price) {
-        alert(`เครดิตของคุณไม่พอ! (ขาดอีก ${price - credit} บาท)\nกรุณากดรับเครดิตทดลองฟรี หรือเติมเงินเข้าระบบ`);
+        showAlert(
+            '<i class="fa-solid fa-circle-xmark text-danger me-2"></i>เครดิตไม่เพียงพอ', 
+            `เครดิตของคุณไม่พอซื้อสินค้าชิ้นนี้!<br><span class="text-danger fw-bold">(ขาดอีก ${price - credit} บาท)</span><br><small class="text-muted">กรุณากดรับเครดิตทดลองฟรี หรือเติมเงินเข้าระบบ</small>`
+        );
         return;
     }
 
-    if (confirm(`คุณต้องการยืนยันการซื้อ "${productName}" ในราคา ${price} บาท หรือไม่?`)) {
-        credit -= price;
-        updateCreditDisplay();
+    showAlert(
+        '<i class="fa-solid fa-cart-shopping me-2"></i>ยืนยันการสั่งซื้อ',
+        `คุณต้องการยืนยันการซื้อ <b class="text-warning">${productName}</b><br>ในราคา <b class="text-info">${price} บาท</b> หรือไม่?`,
+        function() {
+            // ทำงานเมื่อกดตกลง
+            credit -= price;
+            updateCreditDisplay();
 
-        // สุ่มสร้าง ID / PASS จำลอง
-        const randomUser = 'RBX_' + Math.floor(100000 + Math.random() * 900000);
-        const randomPass = Math.random().toString(36).slice(-8);
-        const now = new Date().toLocaleString('th-TH');
+            // สุ่มสร้าง ID / PASS จำลอง
+            const randomUser = 'RBX_' + Math.floor(100000 + Math.random() * 900000);
+            const randomPass = Math.random().toString(36).slice(-8);
+            const now = new Date().toLocaleString('th-TH');
 
-        // บันทึกประวัติ
-        buyHistory.unshift({
-            id: buyHistory.length + 1,
-            time: now,
-            name: productName,
-            price: price,
-            account: `${randomUser} : ${randomPass}`
-        });
+            // บันทึกประวัติ
+            buyHistory.unshift({
+                id: buyHistory.length + 1,
+                time: now,
+                name: productName,
+                price: price,
+                account: `${randomUser} : ${randomPass}`
+            });
 
-        renderBuyHistory();
-        alert(`สั่งซื้อสำเร็จ!\nคุณได้รับบัญชี: ${randomUser}\nรหัสผ่าน: ${randomPass}`);
-        showPage('history-buy');
-    }
+            renderBuyHistory();
+
+            setTimeout(() => {
+                showAlert(
+                    '<i class="fa-solid fa-box-open text-success me-2"></i>สั่งซื้อสำเร็จ!',
+                    `<div class="bg-black p-3 rounded border border-secondary text-start">
+                        <p class="mb-1"><b>สินค้า:</b> ${productName}</p>
+                        <p class="mb-1"><b>Username:</b> <code class="text-warning fs-6">${randomUser}</code></p>
+                        <p class="mb-0"><b>Password:</b> <code class="text-warning fs-6">${randomPass}</code></p>
+                    </div>`,
+                    function() {
+                        showPage('history-buy');
+                    }
+                );
+            }, 300);
+        },
+        true // แสดงปุ่มยกเลิก
+    );
 }
 
 // ฟังก์ชันแสดงรายการประวัติเติมเงิน
