@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+
+    <title>JERATOU SHOP - Login</title>
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,52 +14,92 @@
 
         <div class="login-box">
 
-            <h1>Welcome Back</h1>
-            <p class="subtitle">เข้าสู่ระบบเพื่อดำเนินการต่อ</p>
+            <!-- Logo -->
+            <div class="logo">
+                🎮 <span>JERATOU SHOP</span>
+            </div>
 
-            <form>
+            <div class="gold-line"></div>
 
+            <h1>เข้าสู่ระบบ</h1>
+
+            <p class="subtitle">
+                เข้าสู่ระบบเพื่อใช้งาน JERATOU SHOP
+            </p>
+
+            <!-- ข้อความแจ้งเตือน -->
+            <div id="message" class="message"></div>
+
+            <form id="loginForm">
+
+                <!-- Email / Username -->
                 <div class="input-group">
-                    <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="กรอกอีเมลของคุณ"
+
+                    <label for="loginId">
+                        Email หรือ Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="loginId"
+                        placeholder="กรอก Email หรือ Username"
                         required
                     >
+
                 </div>
 
+
+                <!-- Password -->
                 <div class="input-group">
-                    <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
                         placeholder="กรอกรหัสผ่าน"
                         required
                     >
+
                 </div>
 
-                <div class="options">
-                    <label class="remember">
-                        <input type="checkbox">
-                        <span>จำฉันไว้</span>
-                    </label>
 
-                    <a href="#">ลืมรหัสผ่าน?</a>
-                </div>
-
-                <button type="submit">LOGIN</button>
+                <!-- Login Button -->
+                <button type="submit" class="login-btn">
+                    SIGN IN
+                </button>
 
             </form>
 
-            <p class="register">
+
+            <div class="divider">
+                <span>หรือ</span>
+            </div>
+
+
+            <!-- Register -->
+            <p class="register-text">
+
                 ยังไม่มีบัญชี?
-                <a href="#">สมัครสมาชิก</a>
-            </p>
+
+                <a href="register.html">
+                    สมัครสมาชิก
+                </a>
+</p>
+
+
+            <a href="index.html" class="back-home">
+                ← กลับหน้าหลัก
+            </a>
 
         </div>
 
     </div>
+
+
+    <script src="register.js"></script>
 
 </body>
 </html>
