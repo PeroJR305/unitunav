@@ -1,353 +1,1065 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Shop - ร้านจำหน่ายไอดีเกม</title>
+
+    <title>Roblox Shop - ร้านจำหน่ายไอดีและไอเทมเกม</title>
+
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Prompt) -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- SweetAlert2 CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+    >
+
+    <!-- CSS ของเว็บไซต์ -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- Navbar / เมนูหลัก -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-expand-xl navbar-dark sticky-top">
+
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-gamepad me-2"></i>JERATOU SHOP</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <a class="navbar-brand me-4" href="#">
+                <i class="fa-solid fa-gamepad me-2"></i>
+                ROBLOX SHOP
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+            >
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+
                     <li class="nav-item">
-                        <a class="nav-link active text-warning" onclick="showPage('shop', event)" style="cursor:pointer;"><i class="fa-solid fa-store me-1"></i> ร้านค้า</a>
+                        <a
+                            class="nav-link active text-warning"
+                            onclick="showPage('shop', event)"
+                            style="cursor:pointer;"
+                        >
+                            <i class="fa-solid fa-store"></i>
+                            ร้านค้าไอดี
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-light" onclick="showPage('topup', event)" style="cursor:pointer;"><i class="fa-solid fa-wallet me-1"></i> เติมเงิน</a>
+                        <a
+                            class="nav-link text-light"
+                            onclick="showPage('items', event)"
+                            style="cursor:pointer;"
+                        >
+                            <i class="fa-solid fa-box-open"></i>
+                            ร้านค้าไอเทม
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-light" onclick="showPage('history-topup', event)" style="cursor:pointer;"><i class="fa-solid fa-receipt me-1"></i> ประวัติเติมเงิน</a>
+                        <a
+                            class="nav-link text-light"
+                            onclick="showPage('topup', event)"
+                            style="cursor:pointer;"
+                        >
+                            <i class="fa-solid fa-wallet"></i>
+                            เติมเงิน
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-light" onclick="showPage('history-buy', event)" style="cursor:pointer;"><i class="fa-solid fa-clock-rotate-left me-1"></i> ประวัติการสั่งซื้อ</a>
+                        <a
+                            class="nav-link text-light"
+                            onclick="showPage('history-topup', event)"
+                            style="cursor:pointer;"
+                        >
+                            <i class="fa-solid fa-receipt"></i>
+                            ประวัติเติมเงิน
+                        </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link text-light"
+                            onclick="showPage('history-buy', event)"
+                            style="cursor:pointer;"
+                        >
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            ประวัติการสั่งซื้อ
+                        </a>
+                    </li>
+
                 </ul>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="text-warning me-2 fw-bold" style="text-shadow: 0 0 8px var(--glow-yellow);">
-                        <i class="fa-solid fa-coins me-1"></i>เครดิต: <span id="user-credit">0</span> ฿
+
+                <div class="d-flex align-items-center gap-3 mt-3 mt-xl-0">
+
+                    <span class="text-warning fw-bold text-nowrap d-flex align-items-center">
+                        <i class="fa-solid fa-coins me-1"></i>
+                        เครดิต:
+                        <span id="user-credit" class="ms-1">0</span>
+                        ฿
                     </span>
-                    <button class="btn btn-outline-glow btn-sm px-3" data-bs-toggle="modal" data-bs-target="#loginModal"onclick="window.location.href='Login.html'">SIGN IN</button>
+
+                    <a
+                        href="login.html"
+                        class="btn btn-outline-warning btn-sm px-3 text-nowrap"
+                    >
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>
+                        เข้าสู่ระบบ
+                    </a>
+
                 </div>
+
             </div>
         </div>
     </nav>
 
+
+    <!-- ================= MAIN ================= -->
+
     <div class="container my-4">
 
-        <!-- แบนเนอร์หัวเว็บ -->
+        <!-- ================= HEADER BANNER ================= -->
+
         <div class="mb-4">
+
             <div class="header-banner-box">
-                <img src="Screenshot 2026-09-11 204237.png" class="header-banner-img" alt="บริการจำหน่ายไอดีเกม Roblox" onerror="this.src='https://via.placeholder.com/1200x300/ffb700/000000?text=%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B3%E0%B8%AB%E0%B8%99%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B9%84%E0%B8%AD%E0%B8%94%E0%B8%B5%E0%B9%80%E0%B8%81%E0%B8%A1+ROBLOX'">
+
+                <img
+                    src="1.jpg"
+                    class="header-banner-img"
+                    alt="บริการจำหน่ายไอดีเกม Roblox"
+                    onerror="this.src='https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=1200&auto=format&fit=crop'"
+                >
+
             </div>
+
             <div class="p-3 mt-2 bg-dark rounded-3 border border-secondary">
-                <h5 class="fw-bold mb-1 text-warning">ร้านค้าจำหน่าย ไอดีเกม ไอเทมโค้ด รับประกันคุณภาพทุกไอดีแน่นอน</h5>
-                <p class="text-muted small mb-0">จำหน่ายไอดีหลากหลายแมพ และ ไอเทมโค้ดของแต่งตัว Gift Card คุณภาพ สะอาด ปลอดภัย 100%</p>
+
+                <h5 class="fw-bold mb-1 text-warning">
+                    จำหน่าย ไอดี , ไอเทมโค้ด
+                </h5>
+
+                <p class="text-muted small mb-0">
+                    จำหน่ายไอดีหลากหลายแมพ และ ไอเทมโค้ดของแต่งตัว
+                    Gift Card คุณภาพ สะอาด ปลอดภัย 100%
+                </p>
+
             </div>
+
         </div>
 
-        <!-- Banner ประกาศ -->
-        <div class="custom-box p-3 mb-4 d-flex align-items-center justify-content-between">
+
+        <!-- ================= ANNOUNCEMENT ================= -->
+
+        <div class="custom-box p-3 mb-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
+
             <div class="d-flex align-items-center">
+
                 <i class="fa-solid fa-bullhorn fa-lg me-3 text-warning"></i>
+
                 <div>
-                    ยินดีต้อนรับสู่ร้านค้า! กดปุ่มรับเครดิตทดลองฟรีเพื่อลองทดสอบกดซื้อไอดีได้ทันที :)
+                    ยินดีต้อนรับสู่ร้านค้า!
+                    กดปุ่มรับเครดิตทดลองฟรีเพื่อลองทดสอบกดซื้อไอดีหรือไอเทมได้ทันที
                 </div>
+
             </div>
-            <button class="btn btn-sm btn-glow-yellow" onclick="addFreeMoney(100)">
-                <i class="fa-solid fa-plus-circle me-1"></i>รับ 100 เครดิตทดลองฟรี
+
+            <button
+                class="btn btn-sm btn-glow-yellow"
+                onclick="addFreeMoney(100)"
+            >
+                <i class="fa-solid fa-plus-circle me-1"></i>
+                รับ 100 เครดิตทดลองฟรี
             </button>
+
         </div>
 
-        <!-- ================= PAGE 1: ร้านค้า ================= -->
+
+        <!-- ================= PAGE 1 : SHOP ================= -->
+
         <div id="page-shop" class="page-section active">
-            <h4 class="mb-3" style="color: var(--neon-yellow); font-weight: 600;"><i class="fa-solid fa-tags me-2"></i>รายการสินค้าทั้งหมด</h4>
-            
+
+            <h4 class="mb-3 text-warning fw-bold">
+                <i class="fa-solid fa-tags me-2"></i>
+                รายการไอดีเกมทั้งหมด
+            </h4>
+
             <ul class="nav nav-pills mb-4 border-bottom border-secondary pb-3">
+
                 <li class="nav-item">
-                    <button class="nav-link active me-2" data-bs-toggle="pill" data-bs-target="#cat-clean">
-                        <i class="fa-solid fa-shield-halved me-1"></i> ไอดีใหม่สะอาด (Clean Account)
+
+                    <button class="nav-link active me-2 btn-warning text-dark fw-bold">
+
+                        <i class="fa-solid fa-shield-halved me-1"></i>
+                        ไอดีใหม่สะอาด (Clean Account)
+
                     </button>
+
                 </li>
+
             </ul>
 
+
             <div class="tab-content">
+
                 <div class="tab-pane fade show active" id="cat-clean">
+
                     <div class="row g-4">
-                        
-                        <!-- ช่องที่ 1 -->
+
+
+                        <!-- PRODUCT 1 -->
+
                         <div class="col-md-6 col-lg-4">
+
                             <div class="card p-3 h-100 d-flex flex-column">
+
                                 <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 203829_2.png" class="character-img" alt="สินค้าที่ 1" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+1'">
+
+                                    <img
+                                        src="https://i.pinimg.com/474x/48/c1/3a/48c13ac3010c874b86029be720a6ee28.jpg"
+                                        class="character-img"
+                                        alt="สินค้าที่ 1"
+                                        onerror="this.src='https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop'"
+                                    >
+
                                 </div>
+
                                 <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
+
+                                    <span class="badge-clean-green">
+
+                                        <i class="fa-solid fa-check-circle"></i>
+                                        สะอาด 100%
+
+                                    </span>
+
                                 </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox อายุ 30 วัน</h5>
-                                <p class="text-muted small mb-3">สมัครด้วยมือ ไม่เคยผูกเมล/เบอร์ ไม่เคยเติม Robux รหัสสะอาดปลอดภัย</p>
+
+                                <h5 class="fw-bold mb-2">
+                                    ไอดี Roblox อายุ 30 วัน
+                                </h5>
+
+                                <p class="text-muted small mb-3">
+                                    สมัครด้วยมือ ไม่เคยผูกเมล/เบอร์
+                                    ไม่เคยเติม Robux สะอาดปลอดภัย
+                                </p>
+
                                 <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">20 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox อายุ 30 วัน', 20)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
+
+                                    <span class="fs-4 fw-bold text-info">
+                                        20 ฿
+                                    </span>
+
+                                    <button
+                                        class="btn btn-glow-blue"
+                                        onclick="processBuy('ไอดี Roblox อายุ 30 วัน', 20, 'account')"
+                                    >
+                                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                                        ซื้อสินค้า
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
 
-                        <!-- ช่องที่ 2 -->
+
+                        <!-- PRODUCT 2 -->
+
                         <div class="col-md-6 col-lg-4">
+
                             <div class="card p-3 h-100 d-flex flex-column">
+
                                 <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 203919.png" class="character-img" alt="สินค้าที่ 2" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+2'">
+
+                                    <img
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfd5iVl6pkHCR5PR-Ns85QVZV95Zx1QOJCMS_hNCr-6A&s=10"
+                                        class="character-img"
+                                        alt="สินค้าที่ 2"
+                                        onerror="this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop'"
+                                    >
+
                                 </div>
+
                                 <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
+
+                                    <span class="badge-clean-green">
+
+                                        <i class="fa-solid fa-check-circle"></i>
+                                        สะอาด 100%
+
+                                    </span>
+
                                 </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox ดองอายุ 1 ปี</h5>
-                                <p class="text-muted small mb-3">ไอดีสายดอง เหมาะนำไปเล่นต่อ รหัสสะอาด ไม่ผ่านการเชื่อมต่อใดๆ</p>
+
+                                <h5 class="fw-bold mb-2">
+                                    ไอดี Roblox ดองอายุ 1 ปี
+                                </h5>
+
+                                <p class="text-muted small mb-3">
+                                    ไอดีสายดอง เหมาะนำไปเล่นต่อ
+                                    สะอาด ไม่ผ่านการเชื่อมต่อใดๆ
+                                </p>
+
                                 <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">50 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox ดองอายุ 1 ปี', 50)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
+
+                                    <span class="fs-4 fw-bold text-info">
+                                        50 ฿
+                                    </span>
+
+                                    <button
+                                        class="btn btn-glow-blue"
+                                        onclick="processBuy('ไอดี Roblox ดองอายุ 1 ปี', 50, 'account')"
+                                    >
+                                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                                        ซื้อสินค้า
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
 
-                        <!-- ช่องที่ 3 -->
+
+                        <!-- PRODUCT 3 -->
+
                         <div class="col-md-6 col-lg-4">
+
                             <div class="card p-3 h-100 d-flex flex-column">
+
                                 <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 204301.png" class="character-img" alt="สินค้าที่ 3" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+3'">
+
+                                    <img
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUVxy-Fd-LZf4al14eLBMMov2r8vsFv31RnRmrPVuooA&s=10"
+                                        class="character-img"
+                                        alt="สินค้าที่ 3"
+                                        onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop'"
+                                    >
+
                                 </div>
+
                                 <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
+
+                                    <span class="badge-clean-green">
+
+                                        <i class="fa-solid fa-check-circle"></i>
+                                        สะอาด 100%
+
+                                    </span>
+
                                 </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox VIP พิเศษ</h5>
-                                <p class="text-muted small mb-3">ไอดีแต่งสกินพิเศษ พร้อมใช้งาน รหัสสะอาดปลอดภัย ไม่เคยติดแบน</p>
+
+                                <h5 class="fw-bold mb-2">
+                                    ไอดี Roblox VIP พิเศษ
+                                </h5>
+
+                                <p class="text-muted small mb-3">
+                                    ไอดีแต่งสกินพิเศษ พร้อมใช้งาน
+                                    สะอาดปลอดภัย ไม่เคยติดแบน
+                                </p>
+
                                 <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">90 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox VIP พิเศษ', 90)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
+
+                                    <span class="fs-4 fw-bold text-info">
+                                        90 ฿
+                                    </span>
+
+                                    <button
+                                        class="btn btn-glow-blue"
+                                        onclick="processBuy('ไอดี Roblox VIP พิเศษ', 90, 'account')"
+                                    >
+                                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                                        ซื้อสินค้า
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
 
-                        <!-- ช่องที่ 4 -->
+
+                        <!-- PRODUCT 4 -->
+
                         <div class="col-md-6 col-lg-4">
+
                             <div class="card p-3 h-100 d-flex flex-column">
+
                                 <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 203829_2.png" class="character-img" alt="สินค้าที่ 4" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+4'">
+
+                                    <img
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjHeLxr3wpfYDpAJ4xtDDNw2MZxIYxlRNbYbZdO_qssg&s=10"
+                                        class="character-img"
+                                        alt="สินค้าที่ 4"
+                                        onerror="this.src='https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop'"
+                                    >
+
                                 </div>
+
                                 <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
+
+                                    <span class="badge-clean-green">
+
+                                        <i class="fa-solid fa-check-circle"></i>
+                                        สะอาด 100%
+
+                                    </span>
+
                                 </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox อายุ 60 วัน</h5>
-                                <p class="text-muted small mb-3">ดองอายุยาวนาน บัญชีแข็งแรง เหมาะนำไปใช้เป็นตัวหลัก</p>
+
+                                <h5 class="fw-bold mb-2">
+                                    ไอดี Roblox อายุ 60 วัน
+                                </h5>
+
+                                <p class="text-muted small mb-3">
+                                    ดองอายุยาวนาน บัญชีแข็งแรง
+                                    เหมาะนำไปใช้เป็นตัวหลัก
+                                </p>
+
                                 <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">35 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox อายุ 60 วัน', 35)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
+
+                                    <span class="fs-4 fw-bold text-info">
+                                        35 ฿
+                                    </span>
+
+                                    <button
+                                        class="btn btn-glow-blue"
+                                        onclick="processBuy('ไอดี Roblox อายุ 60 วัน', 35, 'account')"
+                                    >
+                                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                                        ซื้อสินค้า
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
 
-                        <!-- ช่องที่ 5 -->
+
+                        <!-- PRODUCT 5 -->
+
                         <div class="col-md-6 col-lg-4">
+
                             <div class="card p-3 h-100 d-flex flex-column">
+
                                 <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 203919.png" class="character-img" alt="สินค้าที่ 5" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+5'">
+
+                                    <img
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMTr7K5WDTkQG_dT1EscjukN1riUBJTm2I_macb8Q_gg&s=10"
+                                        class="character-img"
+                                        alt="สินค้าที่ 5"
+                                        onerror="this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop'"
+                                    >
+
                                 </div>
+
                                 <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
+
+                                    <span class="badge-clean-green">
+
+                                        <i class="fa-solid fa-check-circle"></i>
+                                        สะอาด 100%
+
+                                    </span>
+
                                 </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox สกินสายลุย</h5>
-                                <p class="text-muted small mb-3">แต่งตัวชุดหล่อ พร้อมเล่นทุกแมพ ไม่เคยผ่านการใช้โค้ด</p>
+
+                                <h5 class="fw-bold mb-2">
+                                    ไอดี Roblox สกินสายลุย
+                                </h5>
+
+                                <p class="text-muted small mb-3">
+                                    แต่งตัวชุดหล่อ พร้อมเล่นทุกแมพ
+                                    ไม่เคยผ่านการใช้โค้ด
+                                </p>
+
                                 <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">60 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox สกินสายลุย', 60)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
+
+                                    <span class="fs-4 fw-bold text-info">
+                                        60 ฿
+                                    </span>
+
+                                    <button
+                                        class="btn btn-glow-blue"
+                                        onclick="processBuy('ไอดี Roblox สกินสายลุย', 60, 'account')"
+                                    >
+                                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                                        ซื้อสินค้า
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
 
-                        <!-- ช่องที่ 6 -->
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card p-3 h-100 d-flex flex-column">
-                                <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 204301.png" class="character-img" alt="สินค้าที่ 6" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+6'">
-                                </div>
-                                <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
-                                </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox สกินมงกุฎทอง</h5>
-                                <p class="text-muted small mb-3">ไอดีสกินแรร์สายมู พร้อมเครื่องประดับสุดเท่ ไม่ผูกอีเมล</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">120 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox สกินมงกุฎทอง', 120)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- ช่องที่ 7 -->
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card p-3 h-100 d-flex flex-column">
-                                <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 203829_2.png" class="character-img" alt="สินค้าที่ 7" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+7'">
-                                </div>
-                                <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
-                                </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox ดองอายุ 90 วัน</h5>
-                                <p class="text-muted small mb-3">ไอดีดองอายุมากกว่า 3 เดือน ปลอดภัยจากการโดนย้อนกลับ</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">40 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox ดองอายุ 90 วัน', 40)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- PRODUCT 6 -->
 
-                        <!-- ช่องที่ 8 -->
                         <div class="col-md-6 col-lg-4">
-                            <div class="card p-3 h-100 d-flex flex-column">
-                                <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 203919.png" class="character-img" alt="สินค้าที่ 8" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+8'">
-                                </div>
-                                <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
-                                </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox สายฟาร์ม</h5>
-                                <p class="text-muted small mb-3">ไอดีสะอาดพร้อมฟาร์มต่อ เล่นได้ทุกแมพ ปลอดภัย 100%</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">45 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox สายฟาร์ม', 45)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- ช่องที่ 9 -->
-                        <div class="col-md-6 col-lg-4">
                             <div class="card p-3 h-100 d-flex flex-column">
+
                                 <div class="character-img-box mb-3">
-                                    <img src="Screenshot 2026-09-11 204301.png" class="character-img" alt="สินค้าที่ 9" onerror="this.src='https://via.placeholder.com/200x200/121217/ffb700?text=Roblox+9'">
+
+                                    <img
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgfyDHqFT3mEFoY3ADRGGjTEIWkKT8feOmUWlr2WBXDw&s=10"
+                                        class="character-img"
+                                        alt="สินค้าที่ 6"
+                                        onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop'"
+                                    >
+
                                 </div>
+
                                 <div class="mb-2">
-                                    <span class="badge-clean-green"><i class="fa-solid fa-check-circle"></i> สะอาด 100%</span>
+
+                                    <span class="badge-clean-green">
+
+                                        <i class="fa-solid fa-check-circle"></i>
+                                        สะอาด 100%
+
+                                    </span>
+
                                 </div>
-                                <h5 class="fw-bold mb-2">ไอดี Roblox Super VIP</h5>
-                                <p class="text-muted small mb-3">ไอดีพรีเมียม สกินครบเซ็ต สวยฮาไม่ซ้ำใคร พร้อมโอนย้าย</p>
+
+                                <h5 class="fw-bold mb-2">
+                                    ไอดี Roblox สกินมงกุฎทอง
+                                </h5>
+
+                                <p class="text-muted small mb-3">
+                                    ไอดีสกินแรร์สายมู พร้อมเครื่องประดับสุดเท่
+                                    ไม่ผูกอีเมล
+                                </p>
+
                                 <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
-                                    <span class="fs-4 fw-bold text-info">150 ฿</span>
-                                    <button class="btn btn-glow-blue" onclick="processBuy('ไอดี Roblox Super VIP', 150)">
-                                        <i class="fa-solid fa-cart-shopping me-1"></i> ซื้อสินค้า
+
+                                    <span class="fs-4 fw-bold text-info">
+                                        120 ฿
+                                    </span>
+
+                                    <button
+                                        class="btn btn-glow-blue"
+                                        onclick="processBuy('ไอดี Roblox สกินมงกุฎทอง', 120, 'account')"
+                                    >
+                                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                                        ซื้อสินค้า
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
 
                     </div>
+
                 </div>
+
             </div>
+
         </div>
 
-        <!-- ================= PAGE 2: เติมเงิน ================= -->
+
+        <!-- ================= PAGE 2 : ITEMS ================= -->
+
+        <div id="page-items" class="page-section">
+
+            <h4 class="mb-3 text-warning fw-bold">
+                <i class="fa-solid fa-box-open me-2"></i>
+                รายการไอเทมและโค้ดเกม
+            </h4>
+
+            <div class="row g-4">
+
+
+                <!-- ITEM 1 -->
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card p-3 h-100 d-flex flex-column">
+
+                        <div class="character-img-box mb-3">
+
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl4FiVYaDzMo4pCgIez_OayIRY-WY5MGVRdkZI8kqb7a5-rd6PLoaexuo&s=10"
+                                class="character-img"
+                                alt="Roblox Gift Card 100"
+                            >
+
+                        </div>
+
+                        <div class="mb-2">
+
+                            <span class="badge-item-purple">
+
+                                <i class="fa-solid fa-key me-1"></i>
+                                ไอเทมโค้ด
+
+                            </span>
+
+                        </div>
+
+                        <h5 class="fw-bold mb-2">
+                            Roblox Gift Card 100 Baht
+                        </h5>
+
+                        <p class="text-muted small mb-3">
+                            โค้ดบัตรเติมเงิน Roblox
+                            รับเครดิตซื้อ Robux ได้ทันที 100 บาท
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
+
+                            <span class="fs-4 fw-bold text-info">
+                                100 ฿
+                            </span>
+
+                            <button
+                                class="btn btn-glow-blue"
+                                onclick="processBuy('Roblox Gift Card 100 Baht', 100, 'item')"
+                            >
+                                <i class="fa-solid fa-cart-shopping me-1"></i>
+                                ซื้อสินค้า
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITEM 2 -->
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card p-3 h-100 d-flex flex-column">
+
+                        <div class="character-img-box mb-3">
+
+                            <img
+                                src="https://media.online-station.net/images/2023/03/afcfc4f6c10dae6dfc1e02feb7ffa896.webp"
+                                class="character-img"
+                                alt="Code ผลปีศาจ"
+                            >
+
+                        </div>
+
+                        <div class="mb-2">
+
+                            <span class="badge-item-purple">
+
+                                <i class="fa-solid fa-bolt me-1"></i>
+                                โค้ดในเกม
+
+                            </span>
+
+                        </div>
+
+                        <h5 class="fw-bold mb-2">
+                            โค้ดรีสเตตัส Blox Fruits
+                        </h5>
+
+                        <p class="text-muted small mb-3">
+                            โค้ดสำหรับรีสเตตัสตัวละครในแมพ Blox Fruits
+                            ใช้งานได้ทันที
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
+
+                            <span class="fs-4 fw-bold text-info">
+                                15 ฿
+                            </span>
+
+                            <button
+                                class="btn btn-glow-blue"
+                                onclick="processBuy('โค้ดรีสเตตัส Blox Fruits', 15, 'item')"
+                            >
+                                <i class="fa-solid fa-cart-shopping me-1"></i>
+                                ซื้อสินค้า
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITEM 3 -->
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card p-3 h-100 d-flex flex-column">
+
+                        <div class="character-img-box mb-3">
+
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsPPZZ8AHbiAxpiUyw3_3R6IFgGTtaA0ngHsbQnRHzPZx3YdJs1r6uWg0&s=10"
+                                class="character-img"
+                                alt="ดาบเลเจนด์"
+                            >
+
+                        </div>
+
+                        <div class="mb-2">
+
+                            <span class="badge-item-purple">
+
+                                <i class="fa-solid fa-wand-magic-sparkles me-1"></i>
+                                ไอเทมแต่งตัว
+
+                            </span>
+
+                        </div>
+
+                        <h5 class="fw-bold mb-2">
+                            โค้ดกระเป๋าเป้ Limited Edition
+                        </h5>
+
+                        <p class="text-muted small mb-3">
+                            ไอเทมแต่งตัวอวาตาร์สุดแรร์
+                            โค้ดแท้รับประกันใช้งานได้แน่นอน 100%
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top border-secondary">
+
+                            <span class="fs-4 fw-bold text-info">
+                                49 ฿
+                            </span>
+
+                            <button
+                                class="btn btn-glow-blue"
+                                onclick="processBuy('โค้ดกระเป๋าเป้ Limited Edition', 49, 'item')"
+                            >
+                                <i class="fa-solid fa-cart-shopping me-1"></i>
+                                ซื้อสินค้า
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PAGE 3 : TOPUP ================= -->
+
         <div id="page-topup" class="page-section">
-            <h4 class="mb-3" style="color: var(--neon-yellow); font-weight: 600;"><i class="fa-solid fa-wallet me-2"></i>เติมเงินเข้าระบบ (ระบบจำลอง)</h4>
+
+            <h4 class="mb-3 text-warning fw-bold">
+
+                <i class="fa-solid fa-wallet me-2"></i>
+                เติมเงินเข้าระบบ (ระบบจำลอง)
+
+            </h4>
+
             <div class="row justify-content-center">
+
                 <div class="col-md-6">
+
                     <div class="custom-box p-4">
-                        <h5 class="text-center mb-3 fw-bold text-warning">เติมเงินด้วย TrueMoney ซองของขวัญ</h5>
+
+                        <h5 class="text-center mb-3 fw-bold text-warning">
+                            เติมเงินด้วย TrueMoney ซองของขวัญ
+                        </h5>
+
                         <form onsubmit="processTopup(event)">
+
                             <div class="mb-3">
-                                <label class="form-label text-muted">จำนวนเงินที่ต้องการจำลองเติม (฿)</label>
-                                <input type="number" id="topup-amount" class="form-control form-control-dark" placeholder="เช่น 50, 100, 500" value="100" required min="1">
+
+                                <label class="form-label text-muted">
+                                    จำนวนเงินที่ต้องการจำลองเติม (฿)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="topup-amount"
+                                    class="form-control form-control-dark"
+                                    placeholder="เช่น 50, 100, 500"
+                                    value="100"
+                                    required
+                                    min="1"
+                                >
+
                             </div>
+
+
                             <div class="mb-3">
-                                <label class="form-label text-muted">ลิงก์ซองของขวัญ (พิมพ์อะไรก็ได้เพื่อทดสอบ)</label>
-                                <input type="text" class="form-control form-control-dark" placeholder="https://gift.truemoney.com/v1/?v=..." required>
+
+                                <label class="form-label text-muted">
+                                    ลิงก์ซองของขวัญ
+                                    (พิมพ์อะไรก็ได้เพื่อทดสอบ)
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control form-control-dark"
+                                    placeholder="https://gift.truemoney.com/v1/?v=..."
+                                    required
+                                >
+
                             </div>
-                            <button type="submit" class="btn btn-glow-yellow w-100 mt-2 py-2"><i class="fa-solid fa-check me-1"></i> ยืนยันการเติมเงิน</button>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-glow-yellow w-100 mt-2 py-2"
+                            >
+
+                                <i class="fa-solid fa-check me-1"></i>
+                                ยืนยันการเติมเงิน
+
+                            </button>
+
                         </form>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
 
-        <!-- ================= PAGE 3: ประวัติเติมเงิน ================= -->
+
+        <!-- ================= PAGE 4 : TOPUP HISTORY ================= -->
+
         <div id="page-history-topup" class="page-section">
-            <h4 class="mb-3" style="color: var(--neon-yellow); font-weight: 600;"><i class="fa-solid fa-receipt me-2"></i>ประวัติการเติมเงิน</h4>
+
+            <h4 class="mb-3 text-warning fw-bold">
+
+                <i class="fa-solid fa-receipt me-2"></i>
+                ประวัติการเติมเงิน
+
+            </h4>
+
             <div class="table-responsive">
+
                 <table class="table table-dark-custom table-hover">
+
                     <thead>
+
                         <tr>
+
                             <th>#</th>
                             <th>วันที่ / เวลา</th>
                             <th>ช่องทาง</th>
                             <th>จำนวนเงิน</th>
                             <th>สถานะ</th>
+
                         </tr>
+
                     </thead>
+
                     <tbody id="history-topup-list">
+
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">ยังไม่มีประวัติการเติมเงิน</td>
+
+                            <td
+                                colspan="5"
+                                class="text-center text-muted py-4"
+                            >
+                                ยังไม่มีประวัติการเติมเงิน
+                            </td>
+
                         </tr>
+
                     </tbody>
+
                 </table>
+
             </div>
+
         </div>
 
-        <!-- ================= PAGE 4: ประวัติสั่งซื้อ ================= -->
+
+        <!-- ================= PAGE 5 : BUY HISTORY ================= -->
+
         <div id="page-history-buy" class="page-section">
-            <h4 class="mb-3" style="color: var(--neon-yellow); font-weight: 600;"><i class="fa-solid fa-clock-rotate-left me-2"></i>ประวัติการสั่งซื้อ</h4>
+
+            <h4 class="mb-3 text-warning fw-bold">
+
+                <i class="fa-solid fa-clock-rotate-left me-2"></i>
+                ประวัติการสั่งซื้อ
+
+            </h4>
+
             <div class="table-responsive">
+
                 <table class="table table-dark-custom table-hover">
+
                     <thead>
+
                         <tr>
+
                             <th>#</th>
                             <th>วันที่ / เวลา</th>
                             <th>ชื่อสินค้า</th>
                             <th>ราคา</th>
-                            <th>ข้อมูลสินค้า (Username : Password)</th>
+                            <th>ข้อมูลสินค้า (ไอดี / รหัสโค้ด)</th>
+
                         </tr>
+
                     </thead>
+
                     <tbody id="history-buy-list">
+
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">ยังไม่มีประวัติการสั่งซื้อ</td>
+
+                            <td
+                                colspan="5"
+                                class="text-center text-muted py-4"
+                            >
+                                ยังไม่มีประวัติการสั่งซื้อ
+                            </td>
+
                         </tr>
+
                     </tbody>
+
                 </table>
+
             </div>
+
         </div>
 
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="script.js"></script>
+
+    <!-- ================= BUY RESULT MODAL ================= -->
+
+    <div
+        class="modal fade"
+        id="buyResultModal"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content bg-dark text-light border-warning">
+
+                <div class="modal-header border-secondary">
+
+                    <h5
+                        class="modal-title text-warning"
+                        id="buyModalTitle"
+                    >
+                        <i class="fa-solid fa-circle-check text-success me-2"></i>
+                        สั่งซื้อสินค้าสำเร็จ!
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <div class="modal-body text-center py-4">
+
+                    <p
+                        class="mb-2 text-muted"
+                        id="buyModalItemName"
+                    >
+                        สินค้า: -
+                    </p>
+
+                    <h6
+                        class="fw-bold text-info mb-3"
+                        id="buyModalDataTypeLabel"
+                    >
+                        รหัสผ่านและข้อมูลไอดีของคุณ:
+                    </h6>
+
+                    <div
+                        class="p-3 bg-black rounded border border-secondary font-monospace text-warning fs-5 position-relative"
+                        id="buyModalAccountData"
+                    >
+                        User1234 : Pass5678
+                    </div>
+
+                    <small class="text-muted d-block mt-2">
+                        *คุณสามารถดูประวัติการสั่งซื้อย้อนหลังได้ตลอดเวลาที่เมนูประวัติสั่งซื้อ
+                    </small>
+
+                </div>
+
+
+                <div class="modal-footer border-secondary">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        ปิด
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-warning"
+                        onclick="copyAccountData()"
+                    >
+                        <i class="fa-solid fa-copy me-1"></i>
+                        คัดลอกข้อมูล
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+    <!-- JavaScript ของเว็บไซต์ -->
+    <script src="js/script.js"></script>
+
 </body>
+
 </html>
