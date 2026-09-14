@@ -5,163 +5,432 @@
     box-sizing: border-box;
 }
 
+
 body {
-    font-family: Arial, sans-serif;
-    background: #050505;
+
+    font-family: 'Kanit', sans-serif;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 193, 7, 0.08),
+            transparent 45%
+        ),
+        #08090b;
+
     color: white;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================
+   LOGIN CONTAINER
+========================= */
+
+.login-container {
+
     min-height: 100vh;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
+    padding: 25px;
+
 }
 
-/* กล่อง Login */
-.login-container {
-    width: 100%;
-    padding: 20px;
-}
+
+/* =========================
+   LOGIN BOX
+========================= */
 
 .login-box {
-    max-width: 420px;
-    margin: auto;
 
-    background: #0d0d0d;
-    border: 1px solid #1e90ff;
-    border-radius: 15px;
+    width: 450px;
 
-    padding: 40px;
+    max-width: 100%;
 
-    box-shadow: 0 0 30px rgba(30, 144, 255, 0.25);
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1c2024,
+            #101215
+        );
+
+    border: 1px solid #555d65;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.7);
+
 }
 
-/* หัวข้อ */
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #ffd000;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================
+   GOLD LINE
+========================= */
+
+.gold-line {
+
+    width: 100%;
+
+    height: 3px;
+
+    background: #ffc400;
+
+    margin: 25px 0;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 12px rgba(255, 196, 0, 0.4);
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
 h1 {
+
     text-align: center;
-    color: #1e90ff;
-    font-size: 32px;
-    margin-bottom: 10px;
+
+    color: #ffc400;
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+
 }
+
 
 .subtitle {
+
     text-align: center;
-    color: #888;
-    margin-bottom: 30px;
-}
 
-/* Input */
-.input-group {
-    margin-bottom: 20px;
-}
+    color: #aeb4ba;
 
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #ddd;
     font-size: 14px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 13px 15px;
-
-    background: #151515;
-    color: white;
-
-    border: 1px solid #333;
-    border-radius: 8px;
-
-    outline: none;
-    font-size: 15px;
-
-    transition: 0.3s;
-}
-
-.input-group input:focus {
-    border-color: #1e90ff;
-    box-shadow: 0 0 10px rgba(30, 144, 255, 0.25);
-}
-
-.input-group input::placeholder {
-    color: #666;
-}
-
-/* Remember + Forgot password */
-.options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
     margin-bottom: 25px;
 
-    font-size: 13px;
 }
 
-.remember {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #aaa;
+
+/* =========================
+   INPUT
+========================= */
+
+.input-group {
+
+    margin-bottom: 18px;
+
 }
 
-.remember input {
-    accent-color: #1e90ff;
-}
 
-.options a,
-.register a {
-    color: #1e90ff;
-    text-decoration: none;
-}
+.input-group label {
 
-.options a:hover,
-.register a:hover {
-    text-decoration: underline;
-}
+    display: block;
 
-/* ปุ่ม Login */
-button {
-    width: 100%;
-    padding: 13px;
+    margin-bottom: 8px;
 
-    background: #1e90ff;
     color: white;
 
-    border: none;
-    border-radius: 8px;
+    font-size: 15px;
 
-    font-size: 16px;
-    font-weight: bold;
+}
+
+
+.input-group input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    background: #0b0d0f;
+
+    color: white;
+
+    border: 1px solid #50575e;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-family: 'Kanit', sans-serif;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+
+}
+
+
+.input-group input::placeholder {
+
+    color: #6d7379;
+
+}
+
+
+.input-group input:focus {
+
+    border-color: #ffc400;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 196, 0, 0.1);
+
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffad00,
+            #ffd000
+        );
+
+    color: #080808;
+
+    font-family: 'Kanit', sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition: 0.2s;
+
+    box-shadow:
+        0 5px 20px rgba(255, 193, 7, 0.2);
+
 }
 
-button:hover {
-    background: #0077e6;
-    box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
+
+.login-btn:hover {
+
     transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(255, 193, 7, 0.35);
+
 }
 
-/* สมัครสมาชิก */
-.register {
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 23px 0 15px;
+
+    color: #727980;
+
+}
+
+
+.divider::before,
+.divider::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #343a40;
+
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-text {
+
     text-align: center;
-    margin-top: 25px;
 
-    color: #777;
+    color: #aeb4ba;
+
     font-size: 14px;
+
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+
+.register-text a {
+
+    color: #ffc400;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+
+.register-text a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================
+   BACK HOME
+========================= */
+
+.back-home {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #8f969d;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+}
+
+
+.back-home:hover {
+
+    color: #ffc400;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+
+    display: none;
+
+    padding: 11px;
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+}
+
+
+.message.show {
+
+    display: block;
+
+}
+
+
+.message.error {
+
+    color: #ffb5b5;
+
+    background: rgba(220, 53, 69, 0.12);
+
+    border: 1px solid rgba(220, 53, 69, 0.45);
+
+}
+
+
+.message.success {
+
+    color: #c8ffd6;
+
+    background: rgba(25, 135, 84, 0.12);
+
+    border: 1px solid rgba(25, 135, 84, 0.45);
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
 
     .login-box {
-        padding: 30px 20px;
+
+        padding: 25px 20px;
+
+    }
+
+    .logo {
+
+        font-size: 21px;
+
     }
 
     h1 {
-        font-size: 28px;
-    }
-}
 
+        font-size: 26px;
+
+    }
+
+}
