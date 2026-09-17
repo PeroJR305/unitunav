@@ -11,8 +11,8 @@ app.use(express.json());
 // สั่งให้เซิร์ฟเวอร์เปิดไฟล์หน้าบ้าน (HTML, CSS, รูปภาพ) จากโฟลเดอร์เดียวกัน
 app.use(express.static(path.join(__dirname)));
 
-// Connection String ของ MongoDB Atlas
-const mongoURI = 'mongodb+srv://Jerry:12345@cluster0.cjuhp4u.mongodb.net/PunJerr';
+// เชื่อมต่อ MongoDB Atlas โดยดึงค่าจาก Environment Variable บน Render
+const mongoURI = process.env.MONGO_URI;
 
 mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB Atlas Connected Successfully!'))
