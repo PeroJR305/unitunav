@@ -1,10 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path'); // เพิ่ม path สำหรับจัดการโฟลเดอร์หน้าบ้าน
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// สั่งให้เซิร์ฟเวอร์เปิดไฟล์หน้าบ้าน (HTML, CSS, รูปภาพ) จากโฟลเดอร์เดียวกัน
+app.use(express.static(path.join(__dirname)));
 
 // Connection String ของ MongoDB Atlas
 const mongoURI = 'mongodb+srv://Jerry:12345@cluster0.cjuhp4u.mongodb.net/PunJerr';
@@ -109,6 +114,12 @@ app.post('/api/buy', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+// หน้าแรกสุด (เปิดไฟล์ index.html อัตโนมัติเมื่อเข้าเว็บ)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
